@@ -5,6 +5,10 @@ allprojects {
     }
 }
 
+ext {
+    set("firebase_bom_version", "33.8.0")
+}
+
 val newBuildDir: Directory =
     rootProject.layout.buildDirectory
         .dir("../../build")

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "415927141673",
+    "project_id": "my-tiny-journal-c2411",
+    "storage_bucket": "my-tiny-journal-c2411.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415927141673:android:5a37bced4e2e99eb5b2338",
+        "android_client_info": {
+          "package_name": "com.example.my_tiny_journal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOEqWhnxfxRAeNekrmhmYqzHWYQaV7amc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
