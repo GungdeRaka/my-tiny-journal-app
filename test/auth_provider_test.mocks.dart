@@ -7,7 +7,9 @@ import 'dart:async' as _i4;
 
 import 'package:firebase_auth/firebase_auth.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:my_tiny_journal/models/journal_model.dart' as _i6;
 import 'package:my_tiny_journal/services/auth_service.dart' as _i3;
+import 'package:my_tiny_journal/services/journal_service.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -67,4 +69,30 @@ class MockAuthService extends _i1.Mock implements _i3.AuthService {
             returnValueForMissingStub: _i4.Future<void>.value(),
           )
           as _i4.Future<void>);
+}
+
+/// A class which mocks [JournalService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockJournalService extends _i1.Mock implements _i5.JournalService {
+  MockJournalService() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<void> addJournal(_i6.JournalModel? journalData) =>
+      (super.noSuchMethod(
+            Invocation.method(#addJournal, [journalData]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Stream<List<_i6.JournalModel>> getJournal(String? userId) =>
+      (super.noSuchMethod(
+            Invocation.method(#getJournal, [userId]),
+            returnValue: _i4.Stream<List<_i6.JournalModel>>.empty(),
+          )
+          as _i4.Stream<List<_i6.JournalModel>>);
 }

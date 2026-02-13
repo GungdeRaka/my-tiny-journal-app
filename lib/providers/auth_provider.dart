@@ -28,4 +28,8 @@ class AuthProvider extends ChangeNotifier {
       return false;
     }
   }
+
+  Future<void> signOut()async{
+    await _authService.signOut();
+  }
 }

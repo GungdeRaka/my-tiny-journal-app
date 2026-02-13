@@ -3,8 +3,9 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:my_tiny_journal/providers/auth_provider.dart';
 import 'package:my_tiny_journal/services/auth_service.dart';
+import 'package:my_tiny_journal/services/journal_service.dart';
 
-@GenerateMocks([AuthService])
+@GenerateMocks([AuthService,JournalService])
 import 'auth_provider_test.mocks.dart';
 
 void main() {
@@ -21,8 +22,7 @@ void main() {
   test('Login Sukses: isLoading harus true lalu false, dan return true', () async {
     // ARRANGE (Siapkan Skenario)
     // "Hei Service Palsu, kalau nanti signIn dipanggil, pura-pura sukses ya (return null)"
-    when(mockAuthService.signIn(any, any))
-        .thenAnswer((_) async => null );
+    when(mockAuthService.signIn(any, any)).thenAnswer((_) async => null);
 
     // ACT (Lakukan Aksi)
     // Kita panggil fungsi login, tapi jangan ditunggu (await) dulu biar bisa cek loading
@@ -38,7 +38,7 @@ void main() {
     // 3. Cek hasil akhirnya
     expect(result, true); // Harus return true
     expect(authProvider.isLoading, false); // Loading harus mati lagi
-    
+
     // 4. Pastikan service palsu benar-benar dipanggil 1 kali
     verify(mockAuthService.signIn('test@email.com', 'password')).called(1);
   });
@@ -46,8 +46,7 @@ void main() {
   test('Login Gagal: isLoading harus false dan errorMessage terisi', () async {
     // ARRANGE
     // "Hei Service Palsu, kalau signIn dipanggil, lempar error ya!"
-    when(mockAuthService.signIn(any, any))
-        .thenThrow('Password salah');
+    when(mockAuthService.signIn(any, any)).thenThrow('Password salah');
 
     // ACT
     final result = await authProvider.signIn('test@email.com', 'salah');
@@ -56,5 +55,14 @@ void main() {
     expect(result, false); // Harus return false
     expect(authProvider.isLoading, false);
     expect(authProvider.errorMessage, 'Password salah');
+  });
+
+  test('Logout: pastikan memanggil user logout', () async {
+    when(mockAuthService.signOut()).thenAnswer((_) async => null);
+
+    final result = await authProvider.signOut();
+
+    // memastikan bahwa fungsi signOut pada service terpanggil
+    verify(mockAuthService.signOut()).called(1);
   });
 }
