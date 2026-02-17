@@ -9,14 +9,14 @@ import 'package:my_tiny_journal/services/journal_service.dart';
 import 'auth_provider_test.mocks.dart';
 
 void main() {
-  late AuthProvider authProvider;
+  late FirebaseAuthProvider authProvider;
   late MockAuthService mockAuthService;
 
   setUp(() {
     // 1. Siapkan Service Palsu
     mockAuthService = MockAuthService();
     // 2. Masukkan Service Palsu ke Provider
-    authProvider = AuthProvider(service: mockAuthService);
+    authProvider = FirebaseAuthProvider(service: mockAuthService);
   });
 
   test('Login Sukses: isLoading harus true lalu false, dan return true', () async {

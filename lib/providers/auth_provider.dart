@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:my_tiny_journal/services/auth_service.dart';
 
-class AuthProvider extends ChangeNotifier {
+class FirebaseAuthProvider extends ChangeNotifier {
   final AuthService _authService;
-  AuthProvider({AuthService? service})
+  FirebaseAuthProvider({AuthService? service})
     : _authService = service ?? AuthService();
 
   bool _isLoading = false;
