@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
+
 import 'package:mockito/mockito.dart';
 import 'package:my_tiny_journal/models/journal_model.dart';
 import 'package:my_tiny_journal/providers/journal_provider.dart';
-import 'package:my_tiny_journal/services/journal_service.dart';
+
 
 // Import file mock yang digenerate
 import 'auth_provider_test.mocks.dart'; 

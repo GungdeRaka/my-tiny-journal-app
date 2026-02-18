@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:my_tiny_journal/providers/auth_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'add_journal_screen.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -22,9 +24,9 @@ class HomeScreen extends StatelessWidget {
       body: Center(child: const Column(children: [])),
 
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.note_add_outlined),
+        child: const Icon(Icons.note_alt_rounded),
         onPressed: () {
-          //
+          Navigator.push(context, MaterialPageRoute(builder: (context) => AddJournalScreen()));
         },
       ),
     );
