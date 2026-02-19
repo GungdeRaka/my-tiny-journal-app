@@ -22,7 +22,7 @@ void main() {
   test('Login Sukses: isLoading harus true lalu false, dan return true', () async {
     // ARRANGE (Siapkan Skenario)
     // "Hei Service Palsu, kalau nanti signIn dipanggil, pura-pura sukses ya (return null)"
-    when(mockAuthService.signIn(any, any)).thenAnswer((_) async{});
+    when(mockAuthService.signIn(any, any)).thenAnswer((_) async => null);
 
     // ACT (Lakukan Aksi)
     // Kita panggil fungsi login, tapi jangan ditunggu (await) dulu biar bisa cek loading
