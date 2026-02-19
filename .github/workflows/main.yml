@@ -1,0 +1,39 @@
+name: Flutter CI
+
+# Trigger: Robot bekerja setiap ada push ke branch 'main'
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ambil kode dari repo
+        uses: actions/checkout@v3
+
+      - name: Setup Java (Untuk build Android)
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install dependencies (Download package)
+        run: flutter pub get
+
+      - name: Analyze code (Cek typo & aturan kode)
+        run: flutter analyze
+
+      - name: Run tests (Jalankan Unit Test kita)
+        run: flutter test
+
+      - name: Build APK (Pastikan bisa jadi aplikasi)
+        run: flutter build apk --debug
