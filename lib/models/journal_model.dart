@@ -31,7 +31,6 @@ class JournalModel extends Equatable {
 
   Map<String,dynamic> toMap(){
     return {
-      'id': id,
       'userId': userId,
       'title':title ,
       'content': content,
