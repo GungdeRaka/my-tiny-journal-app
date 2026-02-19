@@ -38,7 +38,7 @@ void main() {
     test('addJournal sukses: harus return true & loading false', () async {
       // ARRANGE
       // Karena addJournal return void di Service, kita pakai thenAnswer((_) async => null)
-      when(mockJournalService.addJournal(any)).thenAnswer((_) async => null);
+      when(mockJournalService.addJournal(any)).thenAnswer((_) async {});
 
       // ACT
       final futureResult = journalProvider.addJournal(

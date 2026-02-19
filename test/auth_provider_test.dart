@@ -22,7 +22,7 @@ void main() {
   test('Login Sukses: isLoading harus true lalu false, dan return true', () async {
     // ARRANGE (Siapkan Skenario)
     // "Hei Service Palsu, kalau nanti signIn dipanggil, pura-pura sukses ya (return null)"
-    when(mockAuthService.signIn(any, any)).thenAnswer((_) async => null);
+    when(mockAuthService.signIn(any, any)).thenAnswer((_) async{});
 
     // ACT (Lakukan Aksi)
     // Kita panggil fungsi login, tapi jangan ditunggu (await) dulu biar bisa cek loading
@@ -58,9 +58,9 @@ void main() {
   });
 
   test('Logout: pastikan memanggil user logout', () async {
-    when(mockAuthService.signOut()).thenAnswer((_) async => null);
+    when(mockAuthService.signOut()).thenAnswer((_) async {});
 
-    final result = await authProvider.signOut();
+    await authProvider.signOut();
 
     // memastikan bahwa fungsi signOut pada service terpanggil
     verify(mockAuthService.signOut()).called(1);
