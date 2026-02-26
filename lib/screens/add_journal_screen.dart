@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:my_tiny_journal/models/journal_model.dart';
 import 'package:my_tiny_journal/providers/journal_provider.dart';
 import 'package:provider/provider.dart';
 
 class AddJournalScreen extends StatefulWidget {
-  const AddJournalScreen({super.key});
+  const AddJournalScreen({super.key, this.journalToEdit});
+  final JournalModel? journalToEdit;
 
   @override
   State<AddJournalScreen> createState() => _AddJournalScreenState();
@@ -12,9 +14,25 @@ class AddJournalScreen extends StatefulWidget {
 
 class _AddJournalScreenState extends State<AddJournalScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
+  bool get _isEditing => widget.journalToEdit != null;
+  @override
+  void initState() {
+    super.initState();
+    if (_isEditing) {
+      _titleController.text = widget.journalToEdit!.title;
+      _contentController.text = widget.journalToEdit!.content;
+    }
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _contentController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,31 +86,51 @@ class _AddJournalScreenState extends State<AddJournalScreen> {
       floatingActionButton: Consumer<JournalProvider>(
         builder: (context, journalProvider, child) {
           return FloatingActionButton(
-            child: Icon(Icons.check),
+            child: Text(_isEditing ? "Save" : "Add"),
+
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
-                final user = FirebaseAuth.instance.currentUser;
-
-                if (user == null) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text("User not found!")));
-                  return;
+                bool success = false;
+                if (_isEditing) {
+                  success = await journalProvider.updateJournal(
+                    id: widget.journalToEdit!.id,
+                    title: _titleController.text,
+                    content: _contentController.text,
+                  );
+                } else {
+                  final user = FirebaseAuth.instance.currentUser;
+                  if (user == null) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text("User not found!")));
+                    return;
+                  }
+                  success = await journalProvider.addJournal(
+                    userId: user.uid,
+                    title: _titleController.text,
+                    content: _contentController.text,
+                  );
                 }
-                final success = await journalProvider.addJournal(
-                  userId: user.uid,
-                  title: _titleController.text,
-                  content: _contentController.text,
-                );
 
                 if (success && context.mounted) {
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text("Succeed to add new journal! ✅")),
+                    SnackBar(
+                      content: Text(
+                        _isEditing
+                            ? "Succed to edit journal"
+                            : "Succeed to add new journal! ✅",
+                      ),
+                    ),
                   );
-                } else if (context.mounted){
+                } else if (context.mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(journalProvider.errorMessage ?? "Failed to save new journal!")),
+                    SnackBar(
+                      content: Text(
+                        journalProvider.errorMessage ??
+                            "Failed to save new journal!",
+                      ),
+                    ),
                   );
                 }
               }

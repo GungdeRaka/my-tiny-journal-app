@@ -45,4 +45,42 @@ class JournalProvider extends ChangeNotifier {
       return false;
     }
   }
+
+  Future<bool> updateJournal({
+    required String id,
+    required String title,
+    required String content,
+  }) async {
+    _isLoading = true;
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      await _journalService.updateJournal(id, title, content);
+      _isLoading = false;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _isLoading = false;
+      _errorMessage = e.toString();
+      notifyListeners();
+      return false;
+    }
+  }
+
+  Future<bool> deleteJournal (String id) async{
+    _isLoading= true;
+    _errorMessage = null;
+    notifyListeners();
+    try {
+      await _journalService.deleteJournal(id);
+      _isLoading = false;
+      notifyListeners();
+      return true;
+    } catch (e) {
+      _isLoading= false;
+      _errorMessage = e.toString();
+      notifyListeners();
+      return false;
+    }
+  }
 }

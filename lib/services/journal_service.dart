@@ -25,4 +25,23 @@ class JournalService {
               .toList(),
         );
   }
+
+  Future<void> updateJournal(String id, String title, String content) async {
+    try {
+      await _firestore.collection(_collection).doc(id).update({
+        'title': title,
+        'content': content,
+      });
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> deleteJournal(String journalId) async {
+    try {
+      await _firestore.collection(_collection).doc(journalId).delete();
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

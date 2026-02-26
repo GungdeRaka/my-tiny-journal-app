@@ -95,4 +95,22 @@ class MockJournalService extends _i1.Mock implements _i5.JournalService {
             returnValue: _i4.Stream<List<_i6.JournalModel>>.empty(),
           )
           as _i4.Stream<List<_i6.JournalModel>>);
+
+  @override
+  _i4.Future<void> updateJournal(String? id, String? title, String? content) =>
+      (super.noSuchMethod(
+            Invocation.method(#updateJournal, [id, title, content]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> deleteJournal(String? journalId) =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteJournal, [journalId]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 }

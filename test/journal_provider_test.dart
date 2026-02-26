@@ -77,4 +77,28 @@ void main() {
       );
     });
   });
+
+  // test 3 Update journal
+
+  test("Test 3: berhasil update journal, return true, ubah loading", () async {
+    when(mockJournalService.updateJournal(any, any, any)).thenAnswer((_)async{});
+    final futureResult = journalProvider.updateJournal(id: '123', title: "New Title", content: "New content");
+
+    expect(journalProvider.isLoading, true);
+    final result = await futureResult;
+    expect(result, true);
+    expect(journalProvider.isLoading, false);
+    verify(mockJournalService.updateJournal('123', 'New Title', "New content")).called(1);
+  });
+
+  test("Test 4: Delete journal, Return true, isLoading berubah", ()async{
+    when(mockJournalService.deleteJournal(any)).thenAnswer((_)async{});
+
+    final delete = journalProvider.deleteJournal('123');
+    expect(journalProvider.isLoading, true);
+    final deletedJournal = await delete;
+    expect(deletedJournal, true);
+    expect(journalProvider.isLoading, false);
+    verify(mockJournalService.deleteJournal("123")).called(1);
+  });
 }
