@@ -6,12 +6,12 @@ A simple Flutter-based journaling application that allows users to record their 
 
 ## Packages Used
 
-- **provider** - State management solution for managing app state
-- **firebase_core** - Core Firebase SDK for Flutter
-- **firebase_auth** - Firebase authentication for user login and registration
-- **cloud_firestore** - Cloud database for storing journal entries
-- **intl** - Internationalization and date formatting
-- **uuid** - Generating unique identifiers for journal entries
+- **`provider`** - State management solution for managing app state
+- **`firebase_core`** - Core Firebase SDK for Flutter
+- **`firebase_auth`** - Firebase authentication for user login and registration
+- **`cloud_firestore`** - Cloud database for storing journal entries
+- **`intl`** - Internationalization and date formatting
+- **`uuid`** - Generating unique identifiers for journal entries
 
 ## Key Learning Points
 
