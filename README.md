@@ -4,14 +4,44 @@
 
 A simple Flutter-based journaling application that allows users to record their daily thoughts and moments. This app demonstrates best practices in mobile app development with Firebase integration and clean architecture patterns.
 
+## Folder Structure
+```
+lib
+│
+├── models                # Model (MVVM)
+│   └── journal_model.dart
+│
+├── services              # Data layer (API / Firebase / Database)
+│   ├── auth_service.dart
+│   └── journal_service.dart
+│
+├── providers             # ViewModel (state management & business logic)
+│   ├── auth_provider.dart
+│   └── journal_provider.dart
+│
+├── screens               # View (UI Pages)
+│   ├── add_journal_screen.dart
+│   ├── home_screen.dart
+│   ├── login_screen.dart
+│   └── register_screen.dart
+│
+├── widgets               # Reusable UI components
+│   └── journal_card.dart
+│
+├── statics               # App constants / themes
+│   └── app_theme.dart
+│
+├── firebase_options.dart # Firebase configuration
+└── main.dart             # App entry point
+```
+
 ## Packages Used
 
 - **`provider`** - State management solution for managing app state
 - **`firebase_core`** - Core Firebase SDK for Flutter
 - **`firebase_auth`** - Firebase authentication for user login and registration
 - **`cloud_firestore`** - Cloud database for storing journal entries
-- **`intl`** - Internationalization and date formatting
-- **`uuid`** - Generating unique identifiers for journal entries
+
 
 ## Key Learning Points
 
@@ -49,3 +79,5 @@ A simple Flutter-based journaling application that allows users to record their 
 - Consumer widget implementation
 - Efficient state updates and rebuilds
 - Dependency injection using MultiProvider
+
+
